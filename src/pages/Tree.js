@@ -16,9 +16,9 @@ function Tree() {
           const targets = [];
           for (const [index, line] of lines.entries()) {
             if (
-              line.includes("交出了 樹精設計圖A。") &&
-              lines[index + 1].includes("交出了 樹精設計圖B。") &&
-              lines[index + 2].includes("交出了 樹精設計圖C。") &&
+              /交出了 樹精設計圖(A|B|C)。/.test(line) &&
+              /交出了 樹精設計圖(A|B|C)。/.test(lines[index + 1]) &&
+              /交出了 樹精設計圖(A|B|C)。/.test(lines[index + 2]) &&
               /交出了 .*。/.test(lines[index + 3])
             ) {
               const exec = /獲得了 (.*) 。/.exec(lines[index + 4]);
