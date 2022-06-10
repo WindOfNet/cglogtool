@@ -21,7 +21,8 @@ function MouseBooty() {
           const targets = [];
           for (const [index, line] of lines.entries()) {
             if (line.includes("交出了 遊行禮盒。")) {
-              targets.push(/獲得了 (.*) 。/.exec(lines[index + 1])[1]);
+              const exec = /獲得了 (.*) 。/.exec(lines[index + 1]);
+              exec && exec[1] && targets.push(exec[1]);
             }
           }
           setData(targets);

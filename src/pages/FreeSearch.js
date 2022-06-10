@@ -52,7 +52,7 @@ const FreeSearch = () => {
         if (data) {
           if (data.length) {
             return (
-              <Form className="mt-3" onSubmit={handleSearch}>
+              <Form className="mt-5" onSubmit={handleSearch}>
                 <Form.Group>
                   <Form.Label>檢索文字</Form.Label>
                   <InputGroup>

@@ -4,19 +4,24 @@ import PageLayout from "../components/pageLayout";
 import CgLogUploader from "../components/cglogUploader";
 import { Table } from "react-bootstrap";
 
-function MeiShiang() {
+function Tree() {
   const [data, setData] = useState(null);
   const [groupedData, setGroupedData] = useState(null);
 
   return (
-    <PageLayout title="梅香的心意計算">
+    <PageLayout title="改樹計算">
       <CgLogUploader
         onLoaded={(result) => {
           const lines = flatMap(result, (x) => x.data);
           const targets = [];
           for (const [index, line] of lines.entries()) {
-            if (line.includes("交出了 梅香的心意。")) {
-              const exec = /獲得了 (.*) 。/.exec(lines[index + 1]);
+            if (
+              line.includes("交出了 樹精設計圖A。") &&
+              lines[index + 1].includes("交出了 樹精設計圖B。") &&
+              lines[index + 2].includes("交出了 樹精設計圖C。") &&
+              /交出了 .*。/.test(lines[index + 3])
+            ) {
+              const exec = /獲得了 (.*) 。/.exec(lines[index + 4]);
               exec && exec[1] && targets.push(exec[1]);
             }
           }
@@ -58,4 +63,4 @@ function MeiShiang() {
   );
 }
 
-export default MeiShiang;
+export default Tree;
