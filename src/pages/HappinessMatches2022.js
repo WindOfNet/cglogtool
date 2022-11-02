@@ -52,6 +52,7 @@ function HappinessMatches2022() {
               <tr>
                 <th>獲得物品</th>
                 <th>次數</th>
+                <th>機率</th>
               </tr>
             </thead>
             <tbody>
@@ -89,6 +90,9 @@ function HappinessMatches2022() {
                           {tooltip && <ReactTooltip multiline place="right" />}
                         </>
                       )}
+                    </td>
+                    <td align="right">
+                      {(groupedData[g].length / data.length) * 100}%
                     </td>
                   </tr>
                 ))) || (
