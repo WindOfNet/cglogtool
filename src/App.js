@@ -1,9 +1,10 @@
-import { Container, Navbar, Nav } from "react-bootstrap";
-import { Routes, Route, Outlet, Link, Navigate } from "react-router-dom";
-import FreeSearch from "./pages/FreeSearch";
-import Theft from "./pages/Theft";
-import Tree from "./pages/Tree";
-import HappinessMatches2022 from "./pages/HappinessMatches2022";
+import React from 'react';
+import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Routes, Route, Outlet, Link, Navigate } from 'react-router-dom';
+import FreeSearch from './pages/FreeSearch';
+import Theft from './pages/Theft';
+import Tree from './pages/Tree';
+import HappinessMatches2022 from './pages/HappinessMatches2022';
 
 const App = () => {
   return (

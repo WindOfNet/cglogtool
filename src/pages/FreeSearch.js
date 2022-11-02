@@ -1,12 +1,12 @@
-import { Form, InputGroup, Button, Table } from "react-bootstrap";
-import PageLayout from "../components/pageLayout";
-import CgLogUploader from "../components/cglogUploader";
-import { useEffect, useRef, useState } from "react";
+import React, { Form, InputGroup, Button, Table } from 'react-bootstrap';
+import PageLayout from '../components/pageLayout';
+import CgLogUploader from '../components/cglogUploader';
+import { useEffect, useRef, useState } from 'react';
 
 const FreeSearch = () => {
   const [data, setData] = useState(null);
-  const [searchType, setSearchType] = useState("normal");
-  const [searchText, setSearchText] = useState("");
+  const [searchType, setSearchType] = useState('normal');
+  const [searchText, setSearchText] = useState('');
   const [searchResult, setSearchResult] = useState(null);
 
   const searchTextInputRef = useRef(null);
@@ -21,12 +21,12 @@ const FreeSearch = () => {
     const result = [];
     for (const item of data) {
       for (const line of item.data) {
-        if (searchType === "normal") {
+        if (searchType === 'normal') {
           line.includes(searchText) &&
             result.push({ file: item.file, text: line });
         }
 
-        if (searchType === "regex") {
+        if (searchType === 'regex') {
           new RegExp(searchText).test(line) &&
             result.push({ file: item.file, text: line });
         }
@@ -60,9 +60,9 @@ const FreeSearch = () => {
                       id="r1"
                       name="r"
                       value="normal"
-                      checked={searchType === "normal"}
+                      checked={searchType === 'normal'}
                       onChange={() => {
-                        setSearchType("normal");
+                        setSearchType('normal');
                       }}
                     />
                     <InputGroup.Text as="label" htmlFor="r1">
@@ -72,9 +72,9 @@ const FreeSearch = () => {
                       id="r2"
                       name="r"
                       value="regex"
-                      checked={searchType === "regex"}
+                      checked={searchType === 'regex'}
                       onChange={() => {
-                        setSearchType("regex");
+                        setSearchType('regex');
                       }}
                     />
                     <InputGroup.Text as="label" htmlFor="r2">
@@ -95,7 +95,7 @@ const FreeSearch = () => {
               </Form>
             );
           } else {
-            return "查無資料...";
+            return '查無資料...';
           }
         }
       })()}

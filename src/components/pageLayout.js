@@ -1,3 +1,5 @@
+import React from 'react';
+
 const PageLayout = (props) => {
   const { children, title } = props;
 

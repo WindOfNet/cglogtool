@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { Form } from "react-bootstrap";
-import readCgLog from "../core/readCgLog";
+import React, { useState } from 'react';
+import { Form } from 'react-bootstrap';
+import readCgLog from '../core/readCgLog';
 
 const CgLogUploader = (props) => {
   const { onLoaded } = props;
@@ -24,7 +24,7 @@ const CgLogUploader = (props) => {
                 const text = await readCgLog(file);
                 const resultInFile = [];
 
-                for (const line of text.split("\n")) {
+                for (const line of text.split('\n')) {
                   if (resultInFile.at(-1) === line) {
                     continue;
                   }
@@ -35,7 +35,7 @@ const CgLogUploader = (props) => {
 
               onLoaded(result);
             } catch {
-              alert("error ...");
+              alert('error ...');
             } finally {
               setAnalysing(false);
             }

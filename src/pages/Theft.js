@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import PageLayout from "../components/pageLayout";
-import CgLogUploader from "../components/cglogUploader";
-import { Table, Form, Row, Col } from "react-bootstrap";
-import { uniqBy } from "lodash";
+import React, { useEffect, useState } from 'react';
+import PageLayout from '../components/pageLayout';
+import CgLogUploader from '../components/cglogUploader';
+import { Table, Form, Row, Col } from 'react-bootstrap';
+import { uniqBy } from 'lodash';
 
 function Theft() {
   const [data, setData] = useState(null);
   const [monsterOptions, setMonsterOptions] = useState([]);
-  const [selectedMonster, setSelectedMonster] = useState("全部");
+  const [selectedMonster, setSelectedMonster] = useState('全部');
   const [filteredData, setFilteredData] = useState(null);
 
   useEffect(() => {
     setFilteredData(null);
-    let options = [{ name: "全部", value: "全部" }];
+    let options = [{ name: '全部', value: '全部' }];
     if (data) {
       options = options.concat(
         uniqBy(
@@ -20,20 +20,20 @@ function Theft() {
             const m = x.monster;
 
             if (/(忍貓|熟悉的少女)/.test(m)) {
-              return { name: "忍貓★", value: "忍貓" };
+              return { name: '忍貓★', value: '忍貓' };
             }
 
             if (/豪克/.test(m)) {
-              return { name: "豪克的愛犬★", value: "豪克的愛犬" };
+              return { name: '豪克的愛犬★', value: '豪克的愛犬' };
             }
 
             if (/.之鬥神/.test(m)) {
-              return { name: "鬥神★", value: "鬥神" };
+              return { name: '鬥神★', value: '鬥神' };
             }
 
             return { name: m, value: m };
           }),
-          "value"
+          'value'
         )
       );
     }
@@ -47,17 +47,17 @@ function Theft() {
     }
 
     setFilteredData(
-      (selectedMonster === "全部" && [...data]) ||
+      (selectedMonster === '全部' && [...data]) ||
         data.filter((x) => {
-          if (selectedMonster === "忍貓") {
+          if (selectedMonster === '忍貓') {
             return /(忍貓|熟悉的少女)/.test(x.monster);
           }
 
-          if (selectedMonster === "豪克的愛犬") {
+          if (selectedMonster === '豪克的愛犬') {
             return /(豪克的愛犬|漁夫歐姆豪克)/.test(x.monster);
           }
 
-          if (selectedMonster === "鬥神") {
+          if (selectedMonster === '鬥神') {
             return /.之鬥神/.test(x.monster);
           }
 

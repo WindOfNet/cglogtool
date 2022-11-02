@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
-import { flatMap, groupBy, keys, orderBy } from "lodash";
-import PageLayout from "../components/pageLayout";
-import CgLogUploader from "../components/cglogUploader";
-import { Table } from "react-bootstrap";
-import ReactTooltip from "react-tooltip";
-import "@fortawesome/fontawesome-free/css/fontawesome.css";
-import "@fortawesome/fontawesome-free/css/brands.css";
-import "@fortawesome/fontawesome-free/css/solid.css";
+import React, { useState, useEffect } from 'react';
+import { flatMap, groupBy, keys, orderBy } from 'lodash';
+import PageLayout from '../components/pageLayout';
+import CgLogUploader from '../components/cglogUploader';
+import { Table } from 'react-bootstrap';
+import ReactTooltip from 'react-tooltip';
+import '@fortawesome/fontawesome-free/css/fontawesome.css';
+import '@fortawesome/fontawesome-free/css/brands.css';
+import '@fortawesome/fontawesome-free/css/solid.css';
 
 function HappinessMatches2022() {
   const [data, setData] = useState(null);
@@ -17,7 +17,7 @@ function HappinessMatches2022() {
     const lines = flatMap(result, (x) => x.data);
     const targets = [];
     for (const [index, line] of lines.entries()) {
-      if (line.includes("交出了 幸福火柴棒[2022]。")) {
+      if (line.includes('交出了 幸福火柴棒[2022]。')) {
         const exec = /獲得了 (.*) 。/.exec(lines[index + 1]);
         exec && exec[1] && targets.push(exec[1]);
       }
@@ -28,11 +28,11 @@ function HappinessMatches2022() {
   useEffect(() => {
     const g = groupBy(data, (v) => {
       if (/弗旦(.*)/.test(v)) {
-        return "弗旦裝備";
+        return '弗旦裝備';
       }
 
-      if (v === "燒完的火柴" || v === "火柴？") {
-        return "燒完的火柴";
+      if (v === '燒完的火柴' || v === '火柴？') {
+        return '燒完的火柴';
       }
 
       return v;
@@ -59,13 +59,13 @@ function HappinessMatches2022() {
                 orderBy(
                   keys(groupedData),
                   (k) => groupedData[k].length,
-                  "desc",
+                  'desc'
                 ).map((g, index) => (
                   <tr key={index}>
                     <td>{g}</td>
                     <td align="right">
                       {groupedData[g].length}
-                      {(g === "弗旦裝備" || g === "燒完的火柴") && (
+                      {(g === '弗旦裝備' || g === '燒完的火柴') && (
                         <>
                           <i
                             className="fa-solid fa-list"
@@ -80,10 +80,10 @@ function HappinessMatches2022() {
                               return orderBy(
                                 keys(gi),
                                 (k) => gi[k].length,
-                                "desc",
+                                'desc'
                               )
                                 .map((x) => `${x}: ${gi[x].length}`)
-                                .join("<br />");
+                                .join('<br />');
                             })()}
                           ></i>
                           {tooltip && <ReactTooltip multiline place="right" />}
