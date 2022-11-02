@@ -5,6 +5,9 @@ import FreeSearch from './pages/FreeSearch';
 import Theft from './pages/Theft';
 import Tree from './pages/Tree';
 import HappinessMatches2022 from './pages/HappinessMatches2022';
+import '@fortawesome/fontawesome-free/css/fontawesome.css';
+import '@fortawesome/fontawesome-free/css/brands.css';
+import '@fortawesome/fontawesome-free/css/solid.css';
 
 const App = () => {
   return (
@@ -43,6 +46,15 @@ const Layout = () => {
             </Nav.Link>
             <Nav.Link as={Link} to="/happiness-matches-2022">
               幸福火柴棒[2022]
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link
+              as="a"
+              target="__blank"
+              href="https://github.com/WindOfNet/cglogtool"
+            >
+              <i className="fa-brands fa-github"></i>
             </Nav.Link>
           </Nav>
         </Container>
