@@ -1,10 +1,9 @@
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { Routes, Route, Outlet, Link, Navigate } from "react-router-dom";
 import FreeSearch from "./pages/FreeSearch";
-import MouseBooty from "./pages/MouseBooty";
-import MeiShiang from "./pages/MeiShiang";
 import Theft from "./pages/Theft";
 import Tree from "./pages/Tree";
+import HappinessMatches2022 from "./pages/HappinessMatches2022";
 
 const App = () => {
   return (
@@ -13,8 +12,10 @@ const App = () => {
         <Route index element={<FreeSearch />} />
         <Route path="theft" element={<Theft />} />
         <Route path="tree" element={<Tree />} />
-        <Route path="mousebooty" element={<MouseBooty />} />
-        <Route path="meishiang" element={<MeiShiang />} />
+        <Route
+          path="happiness-matches-2022"
+          element={<HappinessMatches2022 />}
+        />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
@@ -39,11 +40,8 @@ const Layout = () => {
             <Nav.Link as={Link} to="/tree">
               改樹
             </Nav.Link>
-            <Nav.Link as={Link} to="/mousebooty">
-              遊行禮盒
-            </Nav.Link>
-            <Nav.Link as={Link} to="/meishiang">
-              梅香的心意
+            <Nav.Link as={Link} to="/happiness-matches-2022">
+              幸福火柴棒[2022]
             </Nav.Link>
           </Nav>
         </Container>
