@@ -5,6 +5,7 @@ import FreeSearch from './pages/FreeSearch';
 import Theft from './pages/Theft';
 import Tree from './pages/Tree';
 import HappinessMatches2022 from './pages/HappinessMatches2022';
+import DonateTicket from './pages/DonateTicket';
 import '@fortawesome/fontawesome-free/css/fontawesome.css';
 import '@fortawesome/fontawesome-free/css/brands.css';
 import '@fortawesome/fontawesome-free/css/solid.css';
@@ -16,6 +17,7 @@ const App = () => {
         <Route index element={<FreeSearch />} />
         <Route path="theft" element={<Theft />} />
         <Route path="tree" element={<Tree />} />
+        <Route path="donate-ticket" element={<DonateTicket />} />
         <Route
           path="happiness-matches-2022"
           element={<HappinessMatches2022 />}
@@ -43,6 +45,9 @@ const Layout = () => {
             </Nav.Link>
             <Nav.Link as={Link} to="/tree">
               改樹
+            </Nav.Link>
+            <Nav.Link as={Link} to="/donate-ticket">
+              贊助抽獎券
             </Nav.Link>
             <Nav.Link as={Link} to="/happiness-matches-2022">
               幸福火柴棒[2022]
