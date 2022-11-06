@@ -5,5 +5,6 @@ simple tool for cg log
 # dev
 
 ```shell
-npm run start
+npm install
+npm run dev[ -- --open]
 ```
