@@ -33,7 +33,7 @@
                 </tr>
               </thead>
               <tbody>
-                {#each orderBy(Object.entries(groupBy(data, (x) => x)), ([_, value]) => value.length, 'desc') as [key, value]}
+                {#each orderBy(Object.entries(groupBy(data, (x) => x)), ([, value]) => value.length, 'desc') as [key, value]}
                   <tr>
                     <td>{key}</td>
                     <td>{value.length}</td>

@@ -45,7 +45,7 @@
                       }
 
                       return x;
-                    })), ([_, value]) => value.length, 'desc') as [groupedItem, groupedData]}
+                    })), ([, value]) => value.length, 'desc') as [groupedItem, groupedData]}
                   <tr>
                     <td>{groupedItem}</td>
                     <td>
