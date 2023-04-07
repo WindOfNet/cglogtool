@@ -14,6 +14,7 @@
       <li><a href="/tree">改樹</a></li>
       <li><a href="/donate-ticket">贊助抽獎券</a></li>
       <li><a href="/happiness-matches-2022">幸福火柴棒[2022]</a></li>
+      <li><a href="/easter-egg-2023">復活節彩蛋[2023]</a></li>
     </ul>
   </div>
   <div class="navbar-end mr-5">
