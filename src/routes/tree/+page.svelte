@@ -1,9 +1,15 @@
 <script lang="ts">
   import Page from '$lib/Page.svelte';
   import CgLogUpload from '$lib/CgLogUpload.svelte';
-  import { flatMap, groupBy } from 'lodash';
+  import { flatMap, chain } from 'lodash';
+  import type { Column } from '$lib/types';
+  import Table from '$lib/Table.svelte';
 
-  let data: string[];
+  const columns: Column[] = [
+    { name: 'item', title: '獲得物品' },
+    { name: 'count', title: '次數' }
+  ];
+  let data: string[] = [];
 
   function handleLoaded(event: CustomEvent<{ filename: string; data: string[] }[]>) {
     data = [];
@@ -20,6 +26,12 @@
       }
     }
   }
+
+  $: tableData = chain(data)
+    .groupBy((x) => x)
+    .entries()
+    .map(([n, v]) => ({ item: n, count: v }))
+    .value();
 </script>
 
 <Page title="改樹">
@@ -29,24 +41,7 @@
       <div class="flex flex-col space-y-3">
         <span>共查詢到 {data.length} 筆資料</span>
         {#if data.length > 0}
-          <div class="overflow-x-auto">
-            <table class="table w-full">
-              <thead>
-                <tr>
-                  <th>獲得物品</th>
-                  <th>次數</th>
-                </tr>
-              </thead>
-              <tbody>
-                {#each Object.entries(groupBy(data, (x) => x)) as [key, value]}
-                  <tr>
-                    <td>{key}</td>
-                    <td>{value.length}</td>
-                  </tr>
-                {/each}
-              </tbody>
-            </table>
-          </div>
+          <Table {columns} data={tableData} />
         {/if}
       </div>
     {/if}

@@ -2,8 +2,18 @@
   import Page from '$lib/Page.svelte';
   import CgLogUpload from '$lib/CgLogUpload.svelte';
   import { uniq } from 'lodash';
+  import type { Column } from '$lib/types';
+  import Table from '$lib/Table.svelte';
 
-  let data: { filename: string; message: string; thift: string; monster: string; item: string }[];
+  const columns: Column[] = [
+    { name: 'filename', title: '物品' },
+    { name: 'message', title: '訊息' },
+    { name: 'thift', title: '偷竊者' },
+    { name: 'monster', title: '魔物' },
+    { name: 'item', title: '盜取物品' }
+  ];
+  let data: { filename: string; message: string; thift: string; monster: string; item: string }[] =
+    [];
   let selectedMonster = 'all';
 
   function handleLoaded(event: CustomEvent<{ filename: string; data: string[] }[]>) {
@@ -22,6 +32,21 @@
       }
     }
   }
+
+  $: tableData = data.filter((x) => {
+    switch (selectedMonster) {
+      case 'all':
+        return true;
+      case 'dog':
+        return /(漁夫歐姆豪克|豪克的愛犬)/.test(x.monster);
+      case 'cat':
+        return /(熟悉的少女|忍貓)/.test(x.monster);
+      case 'element-god':
+        return /(土|水|炎|風)之鬥神/.test(x.monster);
+      default:
+        return x.monster === selectedMonster;
+    }
+  });
 </script>
 
 <Page title="偷竊">
@@ -51,53 +76,7 @@
             </select>
           </div>
 
-          <div class="overflow-x-auto">
-            <table class="table w-full">
-              <thead>
-                <tr>
-                  <th>檔案</th>
-                  <th>訊息</th>
-                  <th>偷竊者</th>
-                  <th>魔物</th>
-                  <th>盜取物品</th>
-                </tr>
-              </thead>
-              <tbody>
-                {#each data.filter((x) => {
-                  switch (selectedMonster) {
-                    case 'all':
-                      return true;
-                    case 'dog':
-                      return /(漁夫歐姆豪克|豪克的愛犬)/.test(x.monster);
-                    case 'cat':
-                      return /(熟悉的少女|忍貓)/.test(x.monster);
-                    case 'element-god':
-                      return /(土|水|炎|風)之鬥神/.test(x.monster);
-                    default:
-                      return x.monster === selectedMonster;
-                  }
-                }) as item}
-                  <tr>
-                    <td>
-                      {item.filename}
-                    </td>
-                    <td>
-                      {item.message}
-                    </td>
-                    <td>
-                      {item.thift}
-                    </td>
-                    <td>
-                      {item.monster}
-                    </td>
-                    <td>
-                      {item.item}
-                    </td>
-                  </tr>
-                {/each}
-              </tbody>
-            </table>
-          </div>
+          <Table {columns} data={tableData} />
         {/if}
       </div>
     {/if}

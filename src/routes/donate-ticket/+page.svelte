@@ -1,9 +1,16 @@
 <script lang="ts">
   import Page from '$lib/Page.svelte';
   import CgLogUpload from '$lib/CgLogUpload.svelte';
-  import { flatMap, groupBy, orderBy } from 'lodash';
+  import { flatMap, chain } from 'lodash';
+  import type { Column } from '$lib/types';
+  import Table from '$lib/Table.svelte';
 
   const years = ['2020', '2021', '2022', '2023'];
+  const columns: Column[] = [
+    { name: 'item', title: '物品' },
+    { name: 'count', title: '次數' }
+  ];
+
   let data: Record<string, string>[];
   let year = '2023';
 
@@ -20,6 +27,15 @@
       exec && exec[1] && data.push({ year: r[1], data: exec[1] });
     }
   }
+
+  $: tableData = chain(data)
+    .filter((x) => x['year'] === year)
+    .map((x) => x.data)
+    .groupBy((x) => x)
+    .entries()
+    .map(([n, v]) => ({ item: n, count: v.length }))
+    .orderBy((x) => x.count, 'desc')
+    .value();
 </script>
 
 <Page title="贊助抽獎券">
@@ -40,24 +56,7 @@
       <div class="flex flex-col space-y-3">
         <span>共查詢到 {data.length} 筆資料</span>
         {#if data.length > 0}
-          <div class="overflow-x-auto">
-            <table class="table w-full">
-              <thead>
-                <tr>
-                  <th>獲得物品</th>
-                  <th>次數</th>
-                </tr>
-              </thead>
-              <tbody>
-                {#each orderBy(Object.entries(groupBy( data.filter((x) => x['year'] === year), (x) => x['data'] )), ([, value]) => value.length, 'desc') as [key, value]}
-                  <tr>
-                    <td>{key}</td>
-                    <td>{value.length}</td>
-                  </tr>
-                {/each}
-              </tbody>
-            </table>
-          </div>
+          <Table {columns} data={tableData} />
         {/if}
       </div>
     {/if}
