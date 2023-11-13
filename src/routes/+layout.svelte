@@ -12,6 +12,7 @@
       <li><a href="/">自定義檢索</a></li>
       <li><a href="/theft">偷竊</a></li>
       <li><a href="/tree">改樹</a></li>
+      <li><a href="/tree">改大地鼠</a></li>
       <li><a href="/donate-ticket">贊助抽獎券</a></li>
       <li><a href="/happiness-matches">幸福火柴棒</a></li>
       <li><a href="/easter-egg">復活節彩蛋</a></li>
