@@ -1,5 +1,4 @@
 <script lang="ts">
-  import iconv from 'iconv-lite';
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher<{ loaded: { filename: string; data: string[] }[] }>();
@@ -8,11 +7,10 @@
   function readCgLog(file: File): Promise<string> {
     return new Promise((resolve) => {
       const fr = new FileReader();
-      fr.onload = () => {
-        const buffer = new Uint8Array(fr.result as ArrayBuffer);
-        resolve(iconv.decode(buffer as Buffer, 'big5'));
+      fr.onload = (e) => {
+        resolve(e.target?.result as string);
       };
-      fr.readAsArrayBuffer(file);
+      fr.readAsText(file, 'big5');
     });
   }
 

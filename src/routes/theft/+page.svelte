@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Page from '../../components/Page.svelte';
-  import CgLogUpload from '../../components/CgLogUpload.svelte';
+  import Page from '$lib/Page.svelte';
+  import CgLogUpload from '$lib/CgLogUpload.svelte';
   import { uniq } from 'lodash';
 
   let data: { filename: string; message: string; thift: string; monster: string; item: string }[];

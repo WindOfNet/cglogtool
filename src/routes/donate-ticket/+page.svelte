@@ -1,6 +1,6 @@
 <script lang="ts">
-  import Page from '../../components/Page.svelte';
-  import CgLogUpload from '../../components/CgLogUpload.svelte';
+  import Page from '$lib/Page.svelte';
+  import CgLogUpload from '$lib/CgLogUpload.svelte';
   import { flatMap, groupBy, orderBy } from 'lodash';
 
   let data: Record<string, string>[];
