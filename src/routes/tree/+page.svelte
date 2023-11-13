@@ -1,7 +1,7 @@
 <script lang="ts">
   import Page from '$lib/Page.svelte';
   import CgLogUpload from '$lib/CgLogUpload.svelte';
-  import { flatMap, chain } from 'lodash';
+  import _ from 'lodash';
   import type { Column } from '$lib/types';
   import Table from '$lib/Table.svelte';
 
@@ -13,7 +13,7 @@
 
   function handleLoaded(event: CustomEvent<{ filename: string; data: string[] }[]>) {
     data = [];
-    const lines = flatMap(event.detail, (x) => x.data);
+    const lines = _.flatMap(event.detail, (x) => x.data);
     for (const [index, line] of lines.entries()) {
       if (
         /交出了 樹精設計圖(A|B|C)。/.test(line) &&
@@ -27,7 +27,7 @@
     }
   }
 
-  $: tableData = chain(data)
+  $: tableData = _.chain(data)
     .groupBy((x) => x)
     .entries()
     .map(([n, v]) => ({ item: n, count: v }))

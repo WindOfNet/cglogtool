@@ -1,7 +1,7 @@
 <script lang="ts">
   import Page from '$lib/Page.svelte';
   import CgLogUpload from '$lib/CgLogUpload.svelte';
-  import { uniq } from 'lodash';
+  import _ from 'lodash';
   import type { Column } from '$lib/types';
   import Table from '$lib/Table.svelte';
 
@@ -62,7 +62,7 @@
             </label>
             <select class="select select-info" bind:value={selectedMonster}>
               <option value="all">全部</option>
-              {#each uniq(data.map((x) => x.monster)) as m}
+              {#each _.uniq(data.map((x) => x.monster)) as m}
                 {#if /(熟悉的少女|忍貓)/.test(m)}
                   <option value="cat">★熟悉的少女/忍貓</option>
                 {:else if /(漁夫歐姆豪克|豪克的愛犬)/.test(m)}

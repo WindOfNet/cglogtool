@@ -1,7 +1,7 @@
 <script lang="ts">
   import Page from '$lib/Page.svelte';
   import CgLogUpload from '$lib/CgLogUpload.svelte';
-  import { flatMap, chain, filter } from 'lodash';
+  import _ from 'lodash';
   import fe from 'feather-icons';
   import type { Column } from '$lib/types';
   import Table from '$lib/Table.svelte';
@@ -18,7 +18,7 @@
 
   function handleLoaded(event: CustomEvent<{ filename: string; data: string[] }[]>) {
     data = [];
-    const lines = flatMap(event.detail, (x) => x.data);
+    const lines = _.flatMap(event.detail, (x) => x.data);
     for (const [index, line] of lines.entries()) {
       const r = /交出了 幸福火柴棒\[(.*)\]。/.exec(line);
       if (!r || !r[1]) {
@@ -30,7 +30,7 @@
     }
   }
 
-  $: tableData = chain(data)
+  $: tableData = _.chain(data)
     .filter((x) => x['year'] === year)
     .map((x) => x.data)
     .groupBy((x) => {
@@ -84,7 +84,7 @@
                     {@html fe.icons['list'].toSvg()}
                     <div class="dropdown-content p-2 shadow bg-base-100 rounded-box">
                       <ul>
-                        {#each chain(row['items'])
+                        {#each _.chain(row['items'])
                           .groupBy((x) => x)
                           .entries()
                           .map(([n, v]) => ({ n, v }))
