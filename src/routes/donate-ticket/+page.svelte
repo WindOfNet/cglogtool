@@ -3,8 +3,9 @@
   import CgLogUpload from '$lib/CgLogUpload.svelte';
   import { flatMap, groupBy, orderBy } from 'lodash';
 
+  const years = ['2020', '2021', '2022', '2023'];
   let data: Record<string, string>[];
-  let year = String(new Date().getFullYear());
+  let year = '2023';
 
   function handleLoaded(event: CustomEvent<{ filename: string; data: string[] }[]>) {
     data = [];
@@ -29,7 +30,7 @@
         <span class="label-text">結果顯示</span>
       </label>
       <div class="flex flex-row space-x-3">
-        {#each ['2020', '2021', '2022', '2023'] as y}
+        {#each years as y}
           <input type="radio" id={y} class="radio" value={y} bind:group={year} />
           <label for={y} class="ml-2 whitespace-nowrap">贊助抽獎券[{y}]</label>
         {/each}
