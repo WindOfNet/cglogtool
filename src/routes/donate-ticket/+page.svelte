@@ -12,7 +12,7 @@
   ];
 
   let data: Record<string, string>[];
-  let year = '2023';
+  let year = '2024';
 
   function handleLoaded(event: CustomEvent<{ filename: string; data: string[] }[]>) {
     data = [];
