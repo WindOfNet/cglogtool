@@ -5,7 +5,7 @@
   import type { Column } from '$lib/types';
   import Table from '$lib/Table.svelte';
 
-  const years = ['2020', '2021', '2022', '2023'];
+  const years = ['2020', '2021', '2022', '2023', '2024'];
   const columns: Column[] = [
     { name: 'item', title: '物品' },
     { name: 'count', title: '次數' }
