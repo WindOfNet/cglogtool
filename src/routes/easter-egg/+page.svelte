@@ -3,15 +3,9 @@
   import CgLogUpload from '$lib/CgLogUpload.svelte';
   import _ from 'lodash';
   import fe from 'feather-icons';
-  import type { Column } from '$lib/types';
   import Table from '$lib/Table.svelte';
 
   const years = ['2020', '2021', '2022', '2023'];
-  const columns: Column[] = [
-    { name: 'item', title: '物品' },
-    { name: 'count', title: '次數' },
-    { name: 'odds', title: '機率' }
-  ];
 
   let data: Record<string, string>[];
   let year = '2023';
@@ -64,16 +58,25 @@
       </label>
       <div class="flex flex-row space-x-3">
         {#each years as y}
-          <input type="radio" id={y} class="radio" value={y} bind:group={year} />
-          <label for={y} class="ml-2 whitespace-nowrap">復活節彩蛋[{y}]</label>
+          <label class="label space-x-2">
+            <input type="radio" class="radio" value={y} bind:group={year} />
+            <span class="label-text">復活節彩蛋[{y}]</span>
+          </label>
         {/each}
       </div>
     </div>
     {#if data}
       <div class="flex flex-col space-y-3">
-        <span>共查詢到 {data.filter((x) => x['year'] === year).length} 筆資料</span>
-        {#if data.length > 0}
-          <Table {columns} data={tableData}>
+        <span>共查詢到 {tableData.length} 筆資料</span>
+        {#if tableData.length > 0}
+          <Table
+            columns={[
+              { name: 'item', title: '物品' },
+              { name: 'count', title: '次數' },
+              { name: 'odds', title: '機率(%)' }
+            ]}
+            data={tableData}
+          >
             <svelte:fragment let:column let:row let:defaultValue>
               {#if column === 'count' && ['燒完的火柴', '弗旦裝備'].includes(row['item'])}
                 <div class="flex flex-row space-x-3">

@@ -2,14 +2,9 @@
   import Page from '$lib/Page.svelte';
   import CgLogUpload from '$lib/CgLogUpload.svelte';
   import _ from 'lodash';
-  import type { Column } from '$lib/types';
   import Table from '$lib/Table.svelte';
 
   const years = ['2020', '2021', '2022', '2023', '2024'];
-  const columns: Column[] = [
-    { name: 'item', title: '物品' },
-    { name: 'count', title: '次數' }
-  ];
 
   let data: Record<string, string>[];
   let year = '2024';
@@ -47,16 +42,24 @@
       </label>
       <div class="flex flex-row space-x-3">
         {#each years as y}
-          <input type="radio" id={y} class="radio" value={y} bind:group={year} />
-          <label for={y} class="ml-2 whitespace-nowrap">贊助抽獎券[{y}]</label>
+          <label class="label space-x-2">
+            <input type="radio" class="radio" value={y} bind:group={year} />
+            <span class="label-text">贊助抽獎券[{y}]</span>
+          </label>
         {/each}
       </div>
     </div>
     {#if data}
       <div class="flex flex-col space-y-3">
-        <span>共查詢到 {data.length} 筆資料</span>
-        {#if data.length > 0}
-          <Table {columns} data={tableData} />
+        <span>共查詢到 {tableData.length} 筆資料</span>
+        {#if tableData.length > 0}
+          <Table
+            columns={[
+              { name: 'item', title: '物品' },
+              { name: 'count', title: '次數' }
+            ]}
+            data={tableData}
+          />
         {/if}
       </div>
     {/if}

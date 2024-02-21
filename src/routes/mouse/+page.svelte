@@ -2,13 +2,8 @@
   import Page from '$lib/Page.svelte';
   import CgLogUpload from '$lib/CgLogUpload.svelte';
   import _ from 'lodash';
-  import type { Column } from '$lib/types';
   import Table from '$lib/Table.svelte';
 
-  const columns: Column[] = [
-    { name: 'item', title: '獲得物品' },
-    { name: 'count', title: '次數' }
-  ];
   let data: string[] = [];
 
   function handleLoaded(event: CustomEvent<{ filename: string; data: string[] }[]>) {
@@ -41,7 +36,13 @@
       <div class="flex flex-col space-y-3">
         <span>共查詢到 {data.length} 筆資料</span>
         {#if data.length > 0}
-          <Table {columns} data={tableData} />
+          <Table
+            columns={[
+              { name: 'item', title: '獲得物品' },
+              { name: 'count', title: '次數' }
+            ]}
+            data={tableData}
+          />
         {/if}
       </div>
     {/if}

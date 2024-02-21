@@ -22,8 +22,8 @@
   }
 </script>
 
-<div>
-  <button class="btn btn-primary" on:click={handleScreenshot}>匯出成圖片</button>
+<div class="text-end">
+  <button class="btn btn-primary btn-sm" on:click={handleScreenshot}>匯出成圖片</button>
 </div>
 <div class="overflow-x-auto">
   <table class="table w-full" bind:this={tableRef}>
