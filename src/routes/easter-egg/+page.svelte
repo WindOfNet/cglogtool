@@ -5,10 +5,10 @@
   import fe from 'feather-icons';
   import Table from '$lib/Table.svelte';
 
-  const years = ['2020', '2021', '2022', '2023'];
+  const years = ['2020', '2021', '2022', '2023', '2024'];
 
   let data: Record<string, string>[];
-  let year = '2023';
+  let year = '2024';
 
   function handleLoaded(event: CustomEvent<{ filename: string; data: string[] }[]>) {
     data = [];
