@@ -85,7 +85,7 @@
                   </span>
                   <div class="dropdown dropdown-right dropdown-hover">
                     {@html fe.icons['list'].toSvg()}
-                    <div class="dropdown-content p-2 shadow bg-base-100 rounded-box">
+                    <div class="dropdown-content p-2 shadow bg-base-100 rounded-box w-52">
                       <ul>
                         {#each _.chain(row['items'])
                           .groupBy((x) => x)
