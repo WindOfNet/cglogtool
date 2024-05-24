@@ -4,11 +4,16 @@
   import _ from 'lodash';
   import fe from 'feather-icons';
   import Table from '$lib/Table.svelte';
+  import { getContext } from 'svelte';
+  import { type Writable, derived } from 'svelte/store';
 
-  const years = ['2020', '2021', '2022', '2023', '2024'];
+  const years = derived(
+    getContext<Writable<{ 'easter-egg-years': string[] }>>('configs'),
+    ($v) => $v['easter-egg-years']
+  );
 
   let data: Record<string, string>[];
-  let year = '2024';
+  let year = $years.at(-1);
 
   function handleLoaded(event: CustomEvent<{ filename: string; data: string[] }[]>) {
     data = [];
@@ -57,7 +62,7 @@
         <span class="label-text">結果顯示</span>
       </label>
       <div class="flex flex-row space-x-3">
-        {#each years as y}
+        {#each $years as y}
           <label class="label space-x-2">
             <input type="radio" class="radio" value={y} bind:group={year} />
             <span class="label-text">復活節彩蛋[{y}]</span>

@@ -3,7 +3,8 @@
   import fe from 'feather-icons';
   import { page } from '$app/stores';
   import { themeChange } from 'theme-change';
-  import { onMount } from 'svelte';
+  import { onMount, setContext } from 'svelte';
+  import { writable } from 'svelte/store';
 
   const menu: { name: string; href: string }[] = [
     { name: '自定義檢索', href: '/' },
@@ -16,10 +17,13 @@
   ];
 
   let theme: 'light' | 'dark';
+  let configs = writable(null);
+  setContext('configs', configs);
 
-  onMount(() => {
+  onMount(async () => {
     themeChange(false);
     theme = (localStorage.getItem('theme') as 'light' | 'dark') ?? 'dark';
+    configs.set(await (await fetch('configs.json')).json());
   });
 </script>
 
@@ -90,5 +94,7 @@
   </div>
 </div>
 <div class="p-8 container mx-auto">
-  <slot />
+  {#if $configs}
+    <slot />
+  {/if}
 </div>

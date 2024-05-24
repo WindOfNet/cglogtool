@@ -3,11 +3,16 @@
   import CgLogUpload from '$lib/CgLogUpload.svelte';
   import _ from 'lodash';
   import Table from '$lib/Table.svelte';
+  import { getContext } from 'svelte';
+  import { type Writable, derived } from 'svelte/store';
 
-  const years = ['2020', '2021', '2022', '2023', '2024'];
+  const years = derived(
+    getContext<Writable<{ 'donate-ticket-years': string[] }>>('configs'),
+    ($v) => $v['donate-ticket-years']
+  );
 
   let data: Record<string, string>[];
-  let year = '2024';
+  let year = $years.at(-1);
 
   function handleLoaded(event: CustomEvent<{ filename: string; data: string[] }[]>) {
     data = [];
@@ -41,7 +46,7 @@
         <span class="label-text">結果顯示</span>
       </label>
       <div class="flex flex-row space-x-3">
-        {#each years as y}
+        {#each $years as y}
           <label class="label space-x-2">
             <input type="radio" class="radio" value={y} bind:group={year} />
             <span class="label-text">贊助抽獎券[{y}]</span>
